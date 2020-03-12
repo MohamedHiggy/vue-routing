@@ -1,32 +1,52 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h1>Vue Router Code</h1>
+        <hr />
+        <router-view name="header-top"></router-view>
+        <transition name="slide" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
-    <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  components: {}
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.slide-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  animation: slide-out 1s ease-out forwards;
+}
+.slide-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-enter-active {
+  animation: slide-in 0.5s ease-out forwards;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+@keyframes slide-in {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 </style>
